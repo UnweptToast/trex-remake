@@ -121,6 +121,13 @@ function draw() {
       jumpSound.play();
     }
 
+    if(trex.isTouching(obstaclesGroup)) {
+    trex.changeAnimation("collided")
+    trex.velocityX = 0;
+    is_spawning = false;
+    gameState = END;
+    dieSound.play();
+  }
   }
   else if(gameState === END) {
     trex.velocityX = 0;
@@ -135,15 +142,6 @@ function draw() {
     if(mousePressedOver(restart)) {
       reset();
     } // 285, 105 && 315, 105 && 285, 130 && 315, 130
-  }
-
-
-  if(trex.isTouching(obstaclesGroup)) {
-    trex.changeAnimation("collided")
-    trex.velocityX = 0;
-    is_spawning = false;
-    gameState = END;
-    dieSound.play();
   }
 
   text("High score: " + highScore, trex.x - 30, 30)
